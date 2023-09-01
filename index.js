@@ -1,41 +1,54 @@
 document.getElementById('sort-by-view').addEventListener('click', () => {
-    
+  console.log('clicked')
 });
 
 
 const handleCategory = async () => {
-    const response = await fetch(" https://openapi.programming-hero.com/api/videos/categories");
-    const data = await response.json();
-    const trimData = await data?.data;
-    const tabContainer = document.getElementById('tab-container');
+  const response = await fetch(" https://openapi.programming-hero.com/api/videos/categories");
+  const data = await response.json();
+  const trimData = await data?.data;
+  const tabContainer = document.getElementById('tab-container');
 
-    trimData.forEach((category) => {
-        const div = document.createElement('div');
-        div.innerHTML = `
+  trimData.forEach((category) => {
+    const div = document.createElement('div');
+    div.innerHTML = `
         <a onclick="handleCategoryVideos('${category?.category_id}')" class="tab">${category?.category}</a>
         `;
-        tabContainer.appendChild(div);
-    });
-    // console.log(trimData)
+    tabContainer.appendChild(div);
+  });
+  // console.log(trimData)
 }
 
 const handleCategoryVideos = async (categoryId) => {
-    // console.log(categoryId);
-    const Response = await fetch(` https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
-    const data = await Response.json();
-    eachData = await data.data;
-    const cardContainer = document.getElementById('card-container');
-    cardContainer.innerHTML = "";
-    eachData?.forEach((videos) => {
-        //   console.log(videos)
-        const div = document.createElement('div');
-        const publish = videos?.others?.posted_date;
+  // console.log(categoryId);
+  const Response = await fetch(` https://openapi.programming-hero.com/api/videos/category/${categoryId}`);
+  const data = await Response.json();
+  eachData = await data.data;
+  const cardContainer = document.getElementById('card-container');
+  cardContainer.innerHTML = "";
 
-        div.innerHTML = `
-          <div class="card card-compact w-72 bg-base-100 shadow-xl">
+  if (data.status === false) {
+    const emptyImageContainer = document.createElement('div');
+    emptyImageContainer.innerHTML = `
+    <div class="lg:w-[78rem] md:w-[50rem] flex flex-col items-center text-center">
+    <img src="/Icon.png">
+    <h1 class="text-4xl font-bold">Oops! Sorry There is no content here</h1>
+  </div>
+    `;
+    cardContainer.appendChild(emptyImageContainer);
+    return;
+  }
+
+  eachData?.forEach((videos) => {
+    //   console.log(videos)
+    const div = document.createElement('div');
+    const publish = videos?.others?.posted_date;
+
+    div.innerHTML = `
+          <div class="card card-compact  bg-base-100 shadow-xl">
           <figure class="relative">
-          <img src=${videos?.thumbnail} />
-          <h3 class="absolute bottom-0 rounded right-0 px-2 bg-slate-700 text-white">${publishDate(publish)}</h3>
+          <img class="h-52" src=${videos?.thumbnail} />
+          <h3 class="absolute bottom-1 rounded-lg right-2 px-2 bg-slate-900 text-white">${videos?.others?.posted_date ? publishDate(publish) : ''}</h3>
       </figure>
              <div class="card-body flex justify-between">
             <h2 class="card-title">${videos?.title}</h2>
@@ -52,7 +65,9 @@ const handleCategoryVideos = async (categoryId) => {
                   </div>
                   <div class="flex gap-3">
                     <h6>${videos?.authors[0]?.profile_name}</h6>
-                    <small>${videos?.authors[0]?.verified}</small>
+                    <p>${videos?.authors[0]?.verified ? '<i class="fa-solid fa-circle-check text-[blue] text-xl"></i>' : ''}</p>
+   
+                                  
                   </div>
                 </div>
                  
@@ -64,25 +79,24 @@ const handleCategoryVideos = async (categoryId) => {
         </div>
           `;
 
-        cardContainer.appendChild(div);
-    });
+    cardContainer.appendChild(div);
+  });
 };
 
 
-
 const publishDate = (Date) => {
-    const totalSeconds = Date;
-    const hours = Math.floor(totalSeconds / 3600);
-    const minutes = Math.floor((totalSeconds % 3600) / 60);
-    const seconds = totalSeconds % 60;
-    const noTime = "";
-    const formattedTime = `${hours} : ${minutes} : ${seconds}`;
+  const totalSeconds = Date;
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
+  const noTime = "";
+  const formattedTime = `${hours} : ${minutes} : ${seconds}`;
 
-    if (Date !== "" || Date !== undefined) {
-       return formattedTime;
-    } else {
-        return noTime ;
-    }
+  if (Date !== "" || Date !== undefined) {
+    return formattedTime;
+  } else {
+    return noTime;
+  }
 }
 
 
