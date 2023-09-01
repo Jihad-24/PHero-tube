@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PH Tube</title>
+    <link rel="shortcut icon" href="./Icon.png" type="image/x-icon">
+    <link href="https://cdn.jsdelivr.net/npm/daisyui@3.6.4/dist/full.css" rel="stylesheet" type="text/css" />
+</head>
+<body >
+   <header class="container mx-auto">
+    <nav class="my-6">
+      <div class="navbar bg-base-100">
+          <div class="navbar-start">
+            <div class="dropdown">
+            <img src="./Logo.png" alt="">
+            </div>
+          </div>
+          <div class="navbar-center">
+            <a class="btn normal-case text-xl" id="sort-by-view">Sort by view</a>
+          </div>
+          <div class="navbar-end">
+<button class="btn btn-secondary" onclick="my_modal.showModal()">Blog</button>
+<dialog id="my_modal" class="modal">
+  <form method="dialog" class="modal-box">
+    <div class="	text-center">
+      <div class="mb-4">
+        <h3 class="font-bold text-lg">Question : Discuss the scope of var, let, and const ?</h3>
+      <p class="leading-7"><span class="font-bold">Answer :</span> var, let, and const are three different ways to declare variables in JavaScript, and they have scopes and behaviors. These keywords play a crucial role in how variables are treated.</p>
+      <p class="leading-7">
+        <span class="font-medium">1. var :</span> Variables declared with var are function-scoped or globally-scoped, when it declared inside function it is only accessible within that function's scope. But if it's diclared outside of any function, it becomes a global variable, accessible throughout the entire script.
+        var declarations are hoisted,which can sometimes lead to unexpected behavior.
+      </p>
+        <span class="font-medium">2. let :</span> Variables declared with let are block-scoped, which means they are confined to the block (curly braces{}) in which they are defined.
+      </p>
+        <span class="font-medium">3. const :</span> Variables declared with const are also block-scoped like let.The difference is that when const variables are diclared their values cannot be reassigned once they are assigned.
+      </p>
+      </div>
+      <div class="mb-4">
+        <h3 class="font-bold text-lg">Question : Tell us the use cases of null and undefined ?</h3>
+      <p class="leading-7"><span class="font-bold">Answer :</span> var, let, and const are three different ways to declare variables in JavaScript.</p>
+      </div>
+      <div class="mb-4">
+        <h3 class="font-bold text-lg">Question : What do you mean by REST API ?</h3>
+      <p class="leading-7"><span class="font-bold">Answer :</span> var, let, and const are three different ways to declare variables in JavaScript.</p>
+      </div>
+      
+      <button class="btn btn-neutral ">Close</button>
+    </div>
+    <div>
+    </div>
+  </form>
+</dialog>
+          </div>
+        </div>
+  </nav>
+  <hr>
+   </header>
+
+  <main class="container mx-auto">
+    <div class="tab-container w-full my-2">
+      <div class="tabs tabs p-5 m-auto  text-center flex justify-center" id="tab-container">
+       
+      </div>
+    </div>
+
+    <div id="card-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+      
+    </div>
+    
+    <div id="modal-container">
+
+    </div>
+  </main>
+
+
+    <script src="./index.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</body>
+</html>
