@@ -1,5 +1,5 @@
 document.getElementById('sort-by-view').addEventListener('click', () => {
-  console.log('clicked')
+  
 });
 
 
@@ -12,7 +12,7 @@ const handleCategory = async () => {
   trimData.forEach((category) => {
     const div = document.createElement('div');
     div.innerHTML = `
-        <a onclick="handleCategoryVideos('${category?.category_id}')" class="tab">${category?.category}</a>
+        <a class="mr-2 btn btn-secondary " onclick="handleCategoryVideos('${category?.category_id}')" class="tab">${category?.category}</a>
         `;
     tabContainer.appendChild(div);
   });
@@ -48,7 +48,7 @@ const handleCategoryVideos = async (categoryId) => {
           <div class="card card-compact  bg-base-100 shadow-xl">
           <figure class="relative">
           <img class="h-52" src=${videos?.thumbnail} />
-          <h3 class="absolute bottom-1 rounded-lg right-2 px-2 bg-slate-900 text-white">${videos?.others?.posted_date ? publishDate(publish) : ''}</h3>
+          <h3 class="absolute bottom-1 rounded-lg right-2 px-2 bg-slate-700 text-white">${videos?.others?.posted_date ? publishDate(publish) : ''}</h3>
       </figure>
              <div class="card-body flex justify-between">
             <h2 class="card-title">${videos?.title}</h2>
